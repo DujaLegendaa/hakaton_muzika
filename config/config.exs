@@ -13,6 +13,17 @@ import Config
 config :hakaton_muzika,
   ecto_repos: [HakatonMuzika.Repo]
 
+config :tailwind,
+  version: "3.2.4",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../apps/hakaton_muzika_web/assets", __DIR__)
+  ]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
