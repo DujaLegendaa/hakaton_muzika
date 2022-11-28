@@ -4,11 +4,11 @@ defmodule HakatonMuzika.Repo.Migrations.CreatePlaylists do
   def change do
     create table(:playlists) do
       add :name, :string
-      add :creator, references(:users, on_delete: :nothing)
+      add :user_id, references(:users)
 
       timestamps()
     end
 
-    create index(:playlists, [:creator])
+    create index(:playlists, [:user_id])
   end
 end

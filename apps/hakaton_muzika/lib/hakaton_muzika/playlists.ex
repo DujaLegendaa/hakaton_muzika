@@ -52,7 +52,7 @@ defmodule HakatonMuzika.Playlists do
   def create_playlist(user = %HakatonMuzika.Accounts.User{}, attrs \\ %{}) do
     %Playlist{}
     |> Playlist.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(:creator, user)
+    |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
 
@@ -101,5 +101,20 @@ defmodule HakatonMuzika.Playlists do
   """
   def change_playlist(%Playlist{} = playlist, attrs \\ %{}) do
     Playlist.changeset(playlist, attrs)
+  end
+
+  def add_song(%Playlist{} = playlist, %HakatonMuzika.Music.Song{} = song) do
+    playlist = Repo.preload(playlist, [:songs])
+    playlist
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:songs, [song | playlist.songs])
+    |> Repo.update()
+  end
+
+  def get_user_playlists(%HakatonMuzika.Accounts.User{} = user) do
+    Playlist
+    |> where(user_id: ^user.id)
+    |> preload([:songs])
+    |> Repo.all()
   end
 end

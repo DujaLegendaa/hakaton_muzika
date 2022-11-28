@@ -8,6 +8,7 @@ defmodule HakatonMuzika.Music.Song do
     field :duration, :integer
     field :path, :string
     belongs_to :album, HakatonMuzika.Music.Album
+    many_to_many :playlists, HakatonMuzika.Playlists.Playlist, join_through: "playlists_songs"
 
     timestamps()
   end

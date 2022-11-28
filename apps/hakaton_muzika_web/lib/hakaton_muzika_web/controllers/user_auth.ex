@@ -2,6 +2,7 @@ defmodule HakatonMuzikaWeb.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
+  alias Phoenix.LiveView
   alias HakatonMuzika.Accounts
   alias HakatonMuzikaWeb.Router.Helpers, as: Routes
 
@@ -12,6 +13,15 @@ defmodule HakatonMuzikaWeb.UserAuth do
   @remember_me_cookie "_hakaton_muzika_web_user_remember_me"
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
 
+  def on_mount(:current_user, _params, session, socket) do
+    case session do
+      %{"user_id" => user_id} -> 
+        {:cont, LiveView.assign_new(socket, :current_user, fn -> HakatonMuzika.Accounts.get_user!(user_id) end)}
+
+      %{} ->
+      {:cont, LiveView.assign(socket, :current_user, nil)}
+    end
+  end
   @doc """
   Logs the user in.
 
