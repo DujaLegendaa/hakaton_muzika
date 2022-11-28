@@ -18,22 +18,9 @@ defmodule HakatonMuzikaWeb.Router do
   end
 
   scope "/", HakatonMuzikaWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through :browser
 
     get "/", PageController, :index
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
-  end
-
-  scope "/", HakatonMuzikaWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    live "/playlist", PlaylistLive, :index
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
   # Other scopes may use custom stacks.
@@ -72,15 +59,27 @@ defmodule HakatonMuzikaWeb.Router do
 
   ## Authentication routes
 
-  
   scope "/", HakatonMuzikaWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
 
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
+    get "/users/log_in", UserSessionController, :new
+    post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
+  scope "/", HakatonMuzikaWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/playlists", PlaylistLive, :index
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+  end
 
   scope "/", HakatonMuzikaWeb do
     pipe_through [:browser]
