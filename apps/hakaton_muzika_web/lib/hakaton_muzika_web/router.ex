@@ -21,8 +21,10 @@ defmodule HakatonMuzikaWeb.Router do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     get "/", PageController, :index
-    live "/register", UserLive, :register
-    live "/login", UserLive, :login
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
+    get "/users/log_in", UserSessionController, :new
+    post "/users/log_in", UserSessionController, :create
   end
 
   scope "/", HakatonMuzikaWeb do
@@ -73,10 +75,6 @@ defmodule HakatonMuzikaWeb.Router do
   
   scope "/", HakatonMuzikaWeb do
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
