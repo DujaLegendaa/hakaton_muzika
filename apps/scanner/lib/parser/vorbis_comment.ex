@@ -13,7 +13,7 @@ defmodule Scanner.Parser.VorbisComment do
         |> String.downcase()
         |> String.to_atom()
 
-      parse(rest, Map.put*(v, field, value))
+      parse(rest, Map.put(v, field, value))
      end
 
   def parse(<<>>, v) do

@@ -94,6 +94,7 @@ defmodule HakatonMuzikaWeb do
       import Phoenix.View
 
       import HakatonMuzikaWeb.ErrorHelpers
+      import HakatonMuzikaWeb.LiveHelpers
       alias HakatonMuzikaWeb.Router.Helpers, as: Routes
     end
   end

@@ -7,6 +7,14 @@ import Config
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 if config_env() == :prod do
+  file_server = 
+    System.get_env("FILE_SERVER_IP") ||
+      raise """
+        environment variable FILE_SERVER_IP not set
+        """
+
+  config :hakaton_muzika_web,
+    file_server: file_server
   database_path =
     System.get_env("DATABASE_PATH") ||
       raise """

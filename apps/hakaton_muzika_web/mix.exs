@@ -50,7 +50,11 @@ defmodule HakatonMuzikaWeb.MixProject do
       {:hakaton_muzika, in_umbrella: true},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:tailwind, "~> 0.1.6", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1.6", runtime: Mix.env() == :dev},
+      {:ex_fontawesome, "~> 0.7.2"},
+      {:scanner, in_umbrella: true},
+      {:httpoison, "~> 1.8.2"},
+      {:json, "~> 1.4"}
     ]
   end
 

@@ -1,4 +1,4 @@
-defmodule BluetoothAmp.Music do
+defmodule HakatonMuzika.Music do
   @moduledoc """
   The Music context.
   """
