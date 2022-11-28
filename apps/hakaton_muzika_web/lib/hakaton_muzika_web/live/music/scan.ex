@@ -28,7 +28,7 @@ defmodule HakatonMuzikaWeb.Music.Scan do
           fn {%{name: name, path: path}, songs} -> 
             cover_path = path <> "/Cover.jpg"
             random_name = for _ <- 1..10, into: "", do: <<Enum.random('0123456789abdcef')>>
-            HakatonMuzikaWeb.B3.upload(random_name, cover_path, 50)
+            #HakatonMuzikaWeb.B3.upload(random_name, cover_path, 50)
 
             {:ok, album} = Music.create_album(artist, %{name: name, cover: random_name})
             Enum.map(songs, fn song -> Music.create_song(album, song) end)
