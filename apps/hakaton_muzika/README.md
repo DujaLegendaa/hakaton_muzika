@@ -1,0 +1,3 @@
+# HakatonMuzika
+
+**TODO: Add description**
