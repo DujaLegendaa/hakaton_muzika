@@ -3,7 +3,7 @@ defmodule HakatonMuzikaWeb.PlaylistLive do
 
   alias HakatonMuzika.Playlists
   def mount(%{"id" => id}, _session, socket) do
-    playlist = Playlists.get_playlist!(id)
+    playlist = Playlists.get_playlist_with_songs!(id)
     {:ok, socket
       |> assign_playlist(playlist)}
   end
