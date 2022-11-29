@@ -10,5 +10,19 @@ defmodule HakatonMuzikaWeb.LiveHelpers do
     end
   end
 
-    
+  def duration_str(duration) do
+    duration_s = floor(duration / 1000)
+    mins = floor(duration_s / 60)
+    seconds =
+      rem(duration_s, 60)
+      |> pad()
+    "#{mins}:#{seconds}"
+  end
+
+  def pad(x) do
+    x
+    |> Integer.to_string()
+    |> String.pad_leading(2, "0")
+  end
+
 end

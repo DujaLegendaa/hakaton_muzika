@@ -7,11 +7,11 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
   def mount(%{"id" => id}, session, socket) do
     current_user = HakatonMuzika.Accounts.get_user_by_session_token(session["user_token"])
     album = Music.get_album_with_songs!(id)
-    {:ok, 
+    {:ok,
       socket
       |> assign_album(album)
       |> assign_new(:user_playlists, fn -> HakatonMuzika.Playlists.get_user_playlists(current_user) end)
-    } 
+    }
   end
 
   def assign_album(socket, album) do
@@ -64,19 +64,6 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
     """
   end
 
-  defp duration_str(duration) do
-    duration_s = floor(duration / 1000)
-    mins = floor(duration_s / 60)
-    seconds = 
-      rem(duration_s, 60)
-      |> pad()
-    "#{mins}:#{seconds}"
-  end
 
-  defp pad(x) do
-    x
-    |> Integer.to_string()
-    |> String.pad_leading(2, "0")
-  end
 
 end
