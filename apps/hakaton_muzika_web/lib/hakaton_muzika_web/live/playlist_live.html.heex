@@ -1,6 +1,4 @@
 <p> <%= @playlist.name %> </p>
 <%= for song <- @playlist.songs do %>
-  <p> <%= song.name %>
-      <.song_card title={song.name} duration={song.duration} track={song.track} album_cover={@album.cover} album_name={@album.name} id={song.id}/>
-    </p>
-  <% end %>
+  <.song_card title={song.name} duration={song.duration} track={song.track} id={song.id}/>
+<% end %>

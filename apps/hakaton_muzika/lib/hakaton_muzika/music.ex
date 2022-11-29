@@ -247,6 +247,23 @@ defmodule HakatonMuzika.Music do
       where: s.id == ^song.id
     Repo.one!(query)
   end
+  def get_album_name(song_id) do
+    get_song!(song_id)
+    |> get_album_name()
+  end
+
+  def get_cover(%Song{} = song) do
+    query = from s in Song,
+      join: a in Album, 
+      on:   a.id  == s.album_id,
+      select: a.cover,
+      where: s.id == ^song.id
+    Repo.one!(query)
+  end
+  def get_cover(song_id) do
+    get_song!(song_id)
+    |> get_cover()
+  end
   @doc """
   Creates a song.
 
