@@ -7,31 +7,13 @@
     </div>
   <% end %>
 
-  <div id="main" class="flex place-content-center w-[100%] ">
-    <div id="card" class="flex-col gap-y-50 w-[50%] bg-slate-500 rounded-xl py-[2%] px-[5%]">
-  <%= text_input f, :username, required: true %>
+    <input id="user_username" name="user[username]" type="text" value="">
     <%= error_tag f, :username %>
-
-      <div class="block mb-2 "> <%= label f , :email %>
-        <div class="grow">
-          <%= email_input f, :email, required: true %>
-        </div>
-          <%= error_tag f, :email %>
-      </div>
-
-      <div class="block mb-2">
-        <%= label f, :password %>
-        <div class="justify-items-stretch">
-          <%= password_input f, :password, required: true %>
-        </div>
-        <%= error_tag f, :password %>
-      </div>
-
-      <div class="">
-        <%= submit "Register" %>
-      </div>
-    </div>
-  </div>
+    <input id="user_email" name="user[email]" type="email" value="">
+    <%= error_tag f, :email %>
+    <input id="user_password" name="user[password]" type="password" value="">
+    <%= error_tag f, :password %>
+    <button type="submit">Register</button>
 </.form>
 
 <p>
