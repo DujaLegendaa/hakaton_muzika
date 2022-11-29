@@ -30,20 +30,20 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
 
   def song_card(%{id: _, title: _, duration: _, track: _, album_name: _, album_cover: _} = assigns) do
 ~H"""
-    <div phx-value-song_id={@id} class="flex justify-between m-3 gap-x-[1rem] m-0 p-3 rounded-xl mx-2 hover:bg-neutral-900">
-    <div class="flex">
-      <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(@album_cover)} />
-      <div class="flex flex-col justify-evenly">
-        <p class="text-xl font-bold"><%= cut_text @title %></p>
-        <p class="text-sm"><%= cut_text @album_name %></p>
-        <div class="flex items-center">
-          <FontAwesome.LiveView.icon name="guitar" type="solid" class="w-4 h-4 fill-slate-400"/>
-          <p class="text-xs text-slate-400 font-semibold "><%= duration_str(@duration) %></p>
+    <div phx-value-song_id={@id} class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
+      <div class="flex gap-x-[1rem]">
+        <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(@album_cover)} />
+        <div class="flex flex-col justify-evenly">
+          <p class="text-xl font-bold"><%= cut_text @title %></p>
+          <p class="text-sm"><%= cut_text @album_name %></p>
+          <div class="flex items-center">
+            <FontAwesome.LiveView.icon name="guitar" type="solid" class="w-4 h-4 fill-slate-400"/>
+            <p class="text-xs text-slate-400 font-semibold "><%= duration_str(@duration) %></p>
+          </div>
         </div>
       </div>
-      </div>
-    <div phx-click="add-to-playlist" phx-value-song_id={@id} >
-      <FontAwesome.LiveView.icon name="plus" type="solid" class="w-6 h-6 fill-white"/>
+      <div phx-click="add-to-playlist" phx-value-song_id={@id} >
+        <FontAwesome.LiveView.icon name="plus" type="solid" class="w-6 h-6 fill-white"/>
       </div>
     </div>
     """

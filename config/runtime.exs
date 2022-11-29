@@ -15,6 +15,7 @@ if config_env() == :prod do
 
   config :hakaton_muzika_web,
     file_server: file_server
+
   database_path =
     System.get_env("DATABASE_PATH") ||
       raise """

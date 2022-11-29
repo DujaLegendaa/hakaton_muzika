@@ -9,6 +9,8 @@
 
   <div id="main" class="flex place-content-center w-[100%] ">
     <div id="card" class="flex-col gap-y-50 w-[50%] bg-slate-500 rounded-xl py-[2%] px-[5%]">
+  <%= text_input f, :username, required: true %>
+    <%= error_tag f, :username %>
 
       <div class="block mb-2 "> <%= label f , :email %>
         <div class="grow">

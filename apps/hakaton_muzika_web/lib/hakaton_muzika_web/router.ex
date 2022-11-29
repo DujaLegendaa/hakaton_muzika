@@ -75,7 +75,6 @@ defmodule HakatonMuzikaWeb.Router do
   scope "/", HakatonMuzikaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/playlists", PlaylistLive, :index
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
@@ -87,6 +86,7 @@ defmodule HakatonMuzikaWeb.Router do
     live "/albums", Music.AlbumListLive
     live "/albums/:id", Music.AlbumLive
     live "/scan", Music.Scan
+    live "/playlists/:id", PlaylistLive, :index
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
