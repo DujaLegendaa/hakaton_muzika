@@ -1,4 +1,6 @@
-<p> <%= @playlist.name %> </p>
+<p class="text-6xl"> <%= @playlist.name %> </p>
+<p class="text-2xl"> <%= @user.username %> </p>
+
 <%= for song <- @playlist.songs do %>
   <.song_card title={song.name} duration={song.duration} track={song.track} id={song.id}/>
 <% end %>

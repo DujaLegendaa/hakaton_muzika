@@ -2,10 +2,12 @@ defmodule HakatonMuzikaWeb.PlaylistLive do
   use HakatonMuzikaWeb, :live_view
 
   alias HakatonMuzika.Playlists
-  def mount(%{"id" => id}, _session, socket) do
+  def mount(%{"id" => id}, session, socket) do
+    current_user = HakatonMuzika.Accounts.get_user_by_session_token(session["user_token"])
     playlist = Playlists.get_playlist_with_songs!(id)
     {:ok, socket
-      |> assign_playlist(playlist)}
+      |> assign_playlist(playlist)
+      |> assign_new(:user, fn -> current_user end)}
   end
 
   def assign_playlist(socket, playlist) do
@@ -18,7 +20,7 @@ defmodule HakatonMuzikaWeb.PlaylistLive do
     <div class="relative">
       <div class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
         <div class="flex gap-x-[1rem]">
-          <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(HakatonMuzika.Music.get_cover(@id))} />
+          <img class="rounded-2xl w-[30px] lg:w-[75px]" src={HakatonMuzikaWeb.B3.get_url(HakatonMuzika.Music.get_cover(@id))} />
           <div class="flex flex-col justify-evenly">
             <p class="text-xl font-bold"><%= cut_text @title %></p>
             <p class="text-sm"><%= cut_text HakatonMuzika.Music.get_album_name(@id) %></p>
