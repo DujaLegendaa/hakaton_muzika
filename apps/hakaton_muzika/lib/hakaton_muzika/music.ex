@@ -264,6 +264,7 @@ defmodule HakatonMuzika.Music do
     get_song!(song_id)
     |> get_cover()
   end
+
   @doc """
   Creates a song.
 

@@ -40,6 +40,10 @@ defmodule HakatonMuzika.Playlists do
     get_playlist!(id)
     |> Repo.preload(:songs)
   end
+  def get_playlist_preloaded!(id) do
+    get_playlist!(id)
+    |> Repo.preload([:user, :songs])
+  end
 
   @doc """
   Creates a playlist.

@@ -10,27 +10,25 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body class="bg-[#212121] text-white">
-    <div class="flex flex-col space-y-10 justify-between bg-gray-600 w-[60px] h-screen fixed z-1">
-      <div class="place-self-center">
-        <img src="images/zabica nav.png" class="w-11 h-11">
-      </div>
-      <div class="place-self-center">
+    <div class="flex">
+      <div class="flex flex-col gap-y-10 bg-gray-600 w-[60px] h-screen">
+        <div class="place-self-center">
+          <img src="/images/zabica_nav.png" class="w-11 h-11">
+        </div>
+        <div class="place-self-center">
           <button><FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-      </div>
-      <div class="place-self-center">
+        </div>
+        <div class="place-self-center">
           <button><FontAwesome.LiveView.icon name="bookmark" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-      </div>
-      <div class="place-self-center">
+        </div>
+        <div class="place-self-center">
           <button><FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-      </div>
-      <div class="place-self-center">
+        </div>
+        <div class="place-self-center">
           <button><FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/></button>
+        </div>
       </div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-  </div>
+  <!--
   <%= if @current_user do %>
     <li><%= @current_user.email %></li>
     <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
@@ -39,7 +37,11 @@
     <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
     <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
   <% end %>
-    <%= @inner_content %>
+    -->
+    <div class="w-full">
+      <%= @inner_content %>
+    </div>
+    </div>
   </body>
 
 </html>

@@ -25,8 +25,19 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+let Hooks = {}
+Hooks.AudioPlayer = {
+  mounted() {
+    console.log(this.el)
+    this.el.src="/home/duja-pc/Music/Arctic Monkeys - Favourite Worst Nightmare (2007)/12. 505.flac"
+    this.el.addEventListener("play", song_path => {
+      console.log(song_path)
+    })
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})

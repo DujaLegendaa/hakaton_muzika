@@ -83,6 +83,9 @@ defmodule HakatonMuzikaWeb.Router do
   scope "/", HakatonMuzikaWeb do
     pipe_through [:browser]
 
+    live "/", HomeLive
+
+    live "/player", Music.CurrentSongLive
     live "/albums", Music.AlbumListLive
     live "/albums/:id", Music.AlbumLive
     live "/scan", Music.Scan
@@ -93,7 +96,6 @@ defmodule HakatonMuzikaWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
-    live "/", HomeLive
   end
 
 end
