@@ -36,7 +36,7 @@ defmodule HakatonMuzika.Playlists do
 
   """
   def get_playlist!(id), do: Repo.get!(Playlist, id)
-  def get_playlist_with_songs(id) do
+  def get_playlist_with_songs!(id) do
     get_playlist!(id)
     |> Repo.preload(:songs)
   end
