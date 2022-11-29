@@ -36,6 +36,10 @@ defmodule HakatonMuzika.Playlists do
 
   """
   def get_playlist!(id), do: Repo.get!(Playlist, id)
+  def get_playlist_with_songs!(id) do
+    get_playlist!(id)
+    |> Repo.preload(:songs)
+  end
 
   @doc """
   Creates a playlist.
@@ -49,7 +53,7 @@ defmodule HakatonMuzika.Playlists do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_playlist(user = %HakatonMuzika.Accounts.User{}, attrs \\ %{}) do
+  def create_playlist(%HakatonMuzika.Accounts.User{} = user , attrs \\ %{}) do
     %Playlist{}
     |> Playlist.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)

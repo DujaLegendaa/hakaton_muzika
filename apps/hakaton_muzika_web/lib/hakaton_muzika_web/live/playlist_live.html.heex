@@ -1,1 +1,4 @@
 <p> <%= @playlist.name %> </p>
+<%= for song <- @playlist.songs do %>
+  <p> <%= song.name %> </p>
+  <% end %>

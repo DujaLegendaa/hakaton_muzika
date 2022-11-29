@@ -1,5 +1,6 @@
 defmodule HakatonMuzikaWeb.Music.AlbumLive do
   alias HakatonMuzika.Music
+  alias Phoenix.LiveView.JS
   require Logger
   use HakatonMuzikaWeb, :live_view
 
@@ -9,7 +10,7 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
     {:ok, 
       socket
       |> assign_album(album)
-      |> assign(:user, current_user)
+      |> assign_new(:user_playlists, fn -> HakatonMuzika.Playlists.get_user_playlists(current_user) end)
     } 
   end
 
@@ -23,28 +24,42 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
     {:noreply, socket}
   end
 
-  def handle_event("add-to-playlist", %{"song_id" => id}, socket) do
-    HakatonMuzika.Playlists.add_song(HakatonMuzika.Playlists.get_user_playlists(socket.assigns.user) |> hd(), HakatonMuzika.Music.get_song!(id))
+  def handle_event("add-to-playlist", %{"playlist_id" => playlist_id, "song_id" => song_id}, socket) do
+    # TODO optimize this call
+    HakatonMuzika.Playlists.add_song(HakatonMuzika.Playlists.get_playlist!(playlist_id), HakatonMuzika.Music.get_song!(song_id))
     {:noreply, socket}
   end
 
-  def song_card(%{id: _, title: _, duration: _, track: _, album_name: _, album_cover: _} = assigns) do
+  def song_card(%{id: _, title: _, duration: _, track: _, album_name: _, album_cover: _, playlists: _} = assigns) do
 ~H"""
-    <div phx-value-song_id={@id} class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
-      <div class="flex gap-x-[1rem]">
-        <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(@album_cover)} />
-        <div class="flex flex-col justify-evenly">
-          <p class="text-xl font-bold"><%= cut_text @title %></p>
-          <p class="text-sm"><%= cut_text @album_name %></p>
-          <div class="flex items-center">
-            <FontAwesome.LiveView.icon name="guitar" type="solid" class="w-4 h-4 fill-slate-400"/>
-            <p class="text-xs text-slate-400 font-semibold "><%= duration_str(@duration) %></p>
+    <div class="relative">
+      <div class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
+        <div class="flex gap-x-[1rem]">
+          <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(@album_cover)} />
+          <div class="flex flex-col justify-evenly">
+            <p class="text-xl font-bold"><%= cut_text @title %></p>
+            <p class="text-sm"><%= cut_text @album_name %></p>
+            <div class="flex items-center">
+              <FontAwesome.LiveView.icon name="guitar" type="solid" class="w-4 h-4 fill-slate-400"/>
+              <p class="text-xs text-slate-400 font-semibold "><%= duration_str(@duration) %></p>
+            </div>
           </div>
         </div>
+        <div class="hover:cursor-pointer" phx-click={JS.toggle(to: "#menu-#{@id}", in: {"ease-in duration-150", "opacity-0", "opacity-100"}, out: "fade-out-scale")} >
+          <FontAwesome.LiveView.icon name="plus" type="solid" class="w-6 h-6 fill-white"/>
+        </div>
       </div>
-      <div phx-click="add-to-playlist" phx-value-song_id={@id} >
-        <FontAwesome.LiveView.icon name="plus" type="solid" class="w-6 h-6 fill-white"/>
-      </div>
+    <.playlist_menu id={@id} playlists={@playlists} />
+    </div>
+    """
+  end
+
+  def playlist_menu(%{id: _, playlists: _} = assigns) do
+~H"""
+    <div class="hidden z-10 absolute top-9 right-6 p-2 rounded-xl bg-slate-500" id={"menu-#{Integer.to_string(@id)}"}>
+      <%= for playlist <- @playlists do %>
+        <p class="hover:cursor-pointer" phx-click="add-to-playlist" phx-value-playlist_id={playlist.id} phx-value-song_id={@id}> <%= playlist.name %> </p>
+      <% end %>
     </div>
     """
   end
