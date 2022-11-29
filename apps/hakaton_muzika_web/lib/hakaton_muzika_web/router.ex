@@ -20,7 +20,7 @@ defmodule HakatonMuzikaWeb.Router do
   scope "/", HakatonMuzikaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+
   end
 
   # Other scopes may use custom stacks.
@@ -93,5 +93,7 @@ defmodule HakatonMuzikaWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+    live "/", HomeLive
   end
+
 end
