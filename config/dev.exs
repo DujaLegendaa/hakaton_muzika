@@ -2,6 +2,9 @@ import Config
 
 config :hakaton_muzika_web, 
   file_server: "localhost:4001"
+
+config :hakaton_muzika,
+  music_path: Path.expand("~/Music/")
 # Configure your database
 config :hakaton_muzika, HakatonMuzika.Repo,
   database: Path.expand("../hakaton_muzika_dev.db", Path.dirname(__ENV__.file)),

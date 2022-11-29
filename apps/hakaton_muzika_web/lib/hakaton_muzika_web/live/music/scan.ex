@@ -23,7 +23,7 @@ defmodule HakatonMuzikaWeb.Music.Scan do
     Repo.delete_all Music.Album  
     Repo.delete_all Music.Artist
 
-    scanned = Scanner.scan(Path.expand("~/Music/"))
+    scanned = Scanner.scan(Application.get_env(:hakaton_muzika, :music_path))
     Enum.map(scanned, 
       fn {artist_name, albums_map} -> 
         {:ok, artist} = Music.create_artist(%{name: artist_name})
