@@ -16,7 +16,7 @@ defmodule HakatonMuzikaWeb.Music.CurrentSongLive do
     {:noreply, 
       socket
       |> assign(:current_song, song)
-      |> push_event("current_song", %{id: song.id})
+      |> push_event("current_song", %{id: song.song.id})
     }
   end
 

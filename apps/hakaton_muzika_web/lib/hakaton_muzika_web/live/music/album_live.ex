@@ -30,7 +30,7 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
   end
 
   def handle_event("play", %{"song_id" => id}, socket) do
-    song = Music.get_song!(id)
+    song = Music.get_song_with_album_details!(id)
     HakatonMuzikaWeb.PlayerState.add_current_song(song)
     {:noreply, socket}
   end

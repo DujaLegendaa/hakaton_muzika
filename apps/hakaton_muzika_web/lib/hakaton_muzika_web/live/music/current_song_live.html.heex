@@ -1,9 +1,9 @@
 <div class="bg-red-700">
   <div>
-    <img src={HakatonMuzika.Music.get_cover(@current_song)}/>
+    <img src={@current_song.cover}/>
     <div>
-      <p><%= @current_song.name %></p>
-      <p>artist</p>
+      <p><%= @current_song.song.name %></p>
+      <p><%= @current_song.artist %></p>
     </div>
   </div>
   <div>

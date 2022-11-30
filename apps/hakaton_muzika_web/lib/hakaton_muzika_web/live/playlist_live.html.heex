@@ -4,7 +4,7 @@
   </div>
   <p class="text-4xl px-3 my-2"> <%= @playlist.name %> </p>
   <hr class="h-1 border-0 bg-[#2A2B2F]">
-  <div class="overflow-y-scroll h-[50vh] scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
+  <div class="overflow-y-scroll h-[50vh] scrollbar-thin scrollbar-thumb-white scrollbar-track-[#2A2B2F]">
     <%= for %{song: s, album_name: n, cover: c, artist: a} <- @playlist.songs do %>
       <.song_card title={s.name} duration={s.duration} track={s.track} id={s.id} cover={c} album_name={n} artist_name={a}/>
     <% end %>

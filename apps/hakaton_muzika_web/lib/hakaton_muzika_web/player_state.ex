@@ -15,7 +15,7 @@ defmodule HakatonMuzikaWeb.PlayerState do
     {:ok, :ok}
   end
 
-  def add_current_song(%Music.Song{} = song) do
+  def add_current_song(song) do
     GenServer.cast(@name, {:insert, {:current_song, song}})
     HakatonMuzikaWeb.Endpoint.broadcast(@topic, "current_song", song)
   end
