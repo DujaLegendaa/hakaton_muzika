@@ -39,9 +39,9 @@
   <% end %>
     -->
     <div class="w-full">
-      <div class="flex justify-end space-x-2 place-content-center m-3">
+      <div class="flex space-x-2 m-3 absolute top-3 right-5">
       <%= if @current_user do %>
-        <button class="py-2 px-4"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></button>
+        <button class="md:font-bold font-black bg-[#ebf1f7] rounded py-2 px-5"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></button>
       <% else %>
         <button class="md:font-bold py-2 px-4"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></button>
         <button class="md:font-bold bg-[#62A32A] rounded py-2 px-5"><%= link "Sign up", to: Routes.user_registration_path(@conn, :new) %></button>
