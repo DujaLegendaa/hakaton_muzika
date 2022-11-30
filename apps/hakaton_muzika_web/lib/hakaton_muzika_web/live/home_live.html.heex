@@ -9,7 +9,7 @@
   </div>
   <div class=" grid grid-cols-5 gap-x-16 px-16">
     <%= for album <- @albums do %>
-      <a class="flex items-center flex-col h-1/2" href={"/albums/#{album.id}"}>
+      <a class="flex items-center flex-col h-1/2" data-phx-link="redirect" data-phx-link-state="push" href={"/albums/#{album.id}"}>
         <img src={HakatonMuzikaWeb.B3.get_url album.cover}/>
         <p class="text-md font-bold"> <%= cut_text album.name %> </p>
       </a>

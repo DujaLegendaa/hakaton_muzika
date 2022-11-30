@@ -2,7 +2,7 @@
 <hr class="h-1 border-0 bg-[#2A2B2F]">
 <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-4 gap-x-10 p-7 ">
   <%= for album <- HakatonMuzika.Music.list_albums() do %>
-    <a href={"/albums/#{album.id}"}>
+    <a data-phx-link="redirect" data-phx-link-state="push" href={"/albums/#{album.id}"}>
       <img src={HakatonMuzikaWeb.B3.get_url(album.cover)} class=""/>
       <p class="font-bold text-center"><%= cut_text(album.name) %></p>
     </a>
