@@ -121,6 +121,12 @@ defmodule HakatonMuzika.Music do
     Repo.all(Album)
   end
 
+  def list_albums(n) do
+    query = from a in Album,
+      limit: ^n
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single album.
 
