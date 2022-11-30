@@ -12,11 +12,10 @@ defmodule HakatonMuzikaWeb.PlayerState do
     HakatonMuzikaWeb.Endpoint.subscribe(@topic)
     :ets.new(:player_state, [:set, :named_table])
     :ets.insert(:player_state, {:current_song, nil})
-    :ets.insert(:player_state, {:playing, false})
     {:ok, :ok}
   end
 
-  def add_current_song(%Music.Song{} = song) do
+  def add_current_song(song) do
     GenServer.cast(@name, {:insert, {:current_song, song}})
     HakatonMuzikaWeb.Endpoint.broadcast(@topic, "current_song", song)
   end
@@ -26,29 +25,9 @@ defmodule HakatonMuzikaWeb.PlayerState do
     song
   end
 
-  def get_playing() do
-    [{:playing, playing}] = :ets.lookup(:player_state, :playing)
-    playing
-  end
-
   def remove_current_song() do
     GenServer.cast(@name, {:insert, {:current_song, nil}})
     HakatonMuzikaWeb.Endpoint.broadcast(@topic, "current_song", nil)
-  end
-
-  def play(%Music.Song{} = song) do
-    add_current_song(song) 
-    GenServer.cast(@name, {:insert, {:playing, true}})
-  end
-
-  def continue() do
-    GenServer.cast(@name, {:insert, {:playing, true}})
-    HakatonMuzikaWeb.Endpoint.broadcast(@topic, "continue_pause", true)
-  end
-
-  def pause() do
-    GenServer.cast(@name, {:insert, {:playing, false}})
-    HakatonMuzikaWeb.Endpoint.broadcast(@topic, "continue_pause", false)
   end
 
   def handle_cast({:insert, data}, _state) do

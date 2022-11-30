@@ -29,9 +29,9 @@ let Hooks = {}
 Hooks.AudioPlayer = {
   mounted() {
     console.log(this.el)
-    this.el.src="/home/duja-pc/Music/Arctic Monkeys - Favourite Worst Nightmare (2007)/12. 505.flac"
-    this.el.addEventListener("play", song_path => {
-      console.log(song_path)
+    this.el.src="/stream/3"
+    this.handleEvent("current_song", ({id}) => {
+      this.el.src="/stream/"+id
     })
   }
 }

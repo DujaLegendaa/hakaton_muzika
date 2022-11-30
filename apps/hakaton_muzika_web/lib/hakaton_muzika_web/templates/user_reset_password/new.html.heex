@@ -1,15 +1,17 @@
-<h1>Forgot your password?</h1>
+<div class="w-full flex justify-center">
 
-<.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-
-  <div>
-    <%= submit "Send instructions to reset password" %>
+  <div class="grid grid-cols-1 bg-[#171817] justify-items-center gap-y-7 py-[10%] w-[40vh] rounded-xl drop-shadow-xl ">
+  <.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
+    <div>
+      <h1>Forgot your password?</h1>
+    </div>
+    <div>
+      <input id="user_email" name="user[email]" type="email" value="" placeholder="E-mail" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] color-[#737373]">
+      <%= error_tag f, :email %>
+    </div>
+    <div>
+    <button type="submit" class="bg-[#737373] text-[#eeeeee] rounded-xl w-[30vh] h-[5vh] mt-[5%]">Send</button>
+    </div>
+  </.form>
   </div>
-</.form>
-
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+</div>

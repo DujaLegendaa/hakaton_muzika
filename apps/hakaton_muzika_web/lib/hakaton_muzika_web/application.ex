@@ -11,9 +11,10 @@ defmodule HakatonMuzikaWeb.Application do
       # Start the Telemetry supervisor
       HakatonMuzikaWeb.Telemetry,
       # Start the Endpoint (http/https)
-      HakatonMuzikaWeb.Endpoint
+      HakatonMuzikaWeb.Endpoint,
       # Start a worker by calling: HakatonMuzikaWeb.Worker.start_link(arg)
       # {HakatonMuzikaWeb.Worker, arg}
+      HakatonMuzikaWeb.PlayerState
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -121,6 +121,12 @@ defmodule HakatonMuzika.Music do
     Repo.all(Album)
   end
 
+  def list_albums(n) do
+    query = from a in Album,
+      limit: ^n
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single album.
 
@@ -238,31 +244,25 @@ defmodule HakatonMuzika.Music do
 
   """
   def get_song!(id), do: Repo.get!(Song, id)
-
-  def get_album_name(%Song{} = song) do
-    query = from s in Song,
-      join: a in Album, 
-      on:   a.id  == s.album_id,
-      select: a.name,
-      where: s.id == ^song.id
-    Repo.one!(query)
+  def get_song(id), do: Repo.get(Song, id)
+  def song_with_details_query do
+    from s in Song,
+      join: a in Album,
+      join: ar in Artist,
+      on: a.id == s.album_id and a.artist_id == ar.id,
+      select: %{song: s, album_name: a.name, cover: a.cover, artist: ar.name}
   end
-  def get_album_name(song_id) do
-    get_song!(song_id)
-    |> get_album_name()
+  def song_with_details_query(id) do
+    from [s, x] in song_with_details_query(),
+      where: s.id == ^id
   end
-
-  def get_cover(%Song{} = song) do
-    query = from s in Song,
-      join: a in Album, 
-      on:   a.id  == s.album_id,
-      select: a.cover,
-      where: s.id == ^song.id
-    Repo.one!(query)
+  def get_song_with_album_details!(%Song{} = song) do
+    song_with_details_query(song.id)
+    |> Repo.one!()
   end
-  def get_cover(song_id) do
-    get_song!(song_id)
-    |> get_cover()
+  def get_song_with_album_details!(id) do
+    song_with_details_query(id)
+    |> Repo.one!()
   end
 
   @doc """

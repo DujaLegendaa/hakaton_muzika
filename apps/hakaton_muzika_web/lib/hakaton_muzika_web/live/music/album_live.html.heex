@@ -1,26 +1,12 @@
-<div class="h-[16rem] relative overflow-hidden">
-  <img src={HakatonMuzikaWeb.B3.get_url(@album.cover)} class="w-full h-[25rem] blur-sm"/>
-  <div class="grid grid-cols-7 grid-rows-[repeat(8,_minmax(0,_1fr))] h-[16rem] w-full absolute top-0 left-0 gap-x-1 px-3 py-2">
-    <div class="z-1 col-span-7 row-start-5 opacity-90 lex items-center">
-      <p class="text-lg bg-neutral-900 rounded-xl px-2"><%= cut_text(@album.name) %></p>
-    </div>
-    <div class="z-1 col-span-7 row-start-6 opacity-90 flex items-center">
-      <p class="text-sm bg-neutral-900 rounded-xl px-2 py-1">ARTIST</p>
-    </div>
-    <div class="z-1 col-span-7 row-start-7 opacity-90 flex items-center">
-      <p class="text-sm bg-neutral-900 rounded-xl px-2 py-1">ALBUM INFO</p>
-    </div>
-    <div class="z-1 col-span-1 col-start-1 bg-neutral-900 rounded-xl row-start-[8] opacity-90 flex items-center flex justify-center">
-      <FontAwesome.LiveView.icon name="shuffle" type="solid" class="h-[50%] fill-white" />
-    </div>
-    <div class="z-1 col-span-1 col-start-2 bg-neutral-900 rounded-xl row-start-[8] opacity-90 flex items-center flex justify-center">
-      <FontAwesome.LiveView.icon name="play" type="solid" class="h-[50%] fill-white" />
-    </div>
-    <div class="z-1 col-span-1 col-start-3 bg-neutral-900 rounded-xl row-start-[8] opacity-90 flex items-center flex justify-center">
-      <FontAwesome.LiveView.icon name="magnifying-glass" type="solid" class="h-[50%] fill-white" />
-    </div>
+<div>
+  <div class="shadow-[inset_-10px_0px_10px_5px_#212121] h-[30vh]">
+    <img class="mix-blend-multiply max-h-full w-full object-none" src={HakatonMuzikaWeb.B3.get_url @album.cover} />
+  </div>
+  <p class="text-4xl px-3 my-2"> <%= @album.name %> </p>
+  <hr class="h-1 border-0 bg-[#2A2B2F]">
+  <div class="overflow-y-scroll h-[50vh] scrollbar-thin scrollbar-thumb-white scrollbar-track-[#2A2B2F]">
+    <%= for s <- @album.songs do %>
+      <.song_card title={s.name} duration={s.duration} track={s.track} id={s.id} cover={@album.cover} album_name={@album.name} playlists={@user_playlists} />
+    <% end %>
   </div>
 </div>
-<%= for song <- @album.songs do %>
-  <.song_card title={song.name} duration={song.duration} track={song.track} album_cover={@album.cover} album_name={@album.name} playlists={@user_playlists} id={song.id}/>
-<% end %>

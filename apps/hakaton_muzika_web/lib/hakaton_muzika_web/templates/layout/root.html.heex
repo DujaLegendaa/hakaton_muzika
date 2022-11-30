@@ -15,18 +15,18 @@
         <div class="place-self-center">
           <img src="/images/zabica_nav.png" class="w-11 h-11">
         </div>
-        <div class="place-self-center">
-          <button><FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-        </div>
-        <div class="place-self-center">
-          <button><FontAwesome.LiveView.icon name="bookmark" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-        </div>
-        <div class="place-self-center">
-          <button><FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-        </div>
-        <div class="place-self-center">
-          <button><FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/></button>
-        </div>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+          <FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/albums">
+          <FontAwesome.LiveView.icon name="compact-disc" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+          <FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+          <FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
       </div>
   <!--
   <%= if @current_user do %>
@@ -39,12 +39,14 @@
   <% end %>
     -->
     <div class="w-full">
-    <div class="flex justify-end space-x-2 place-content-center m-3">
-        <div><button class="md:font-bold py-2 px-4">Login</button>
-        </div>
-        <div><button class="txt-white md:font-bold bg-[#62A32A] rounded py-2 px-5">Sign Up</button>
-        </div>
-     </div>
+      <div class="flex space-x-2 m-3 absolute top-3 right-5">
+      <%= if @current_user do %>
+        <button class="md:font-bold font-black bg-[#ebf1f7] rounded py-2 px-5"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></button>
+      <% else %>
+        <button class="md:font-bold py-2 px-4"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></button>
+        <button class="md:font-bold bg-[#62A32A] rounded py-2 px-5"><%= link "Sign up", to: Routes.user_registration_path(@conn, :new) %></button>
+        <% end %>
+      </div>
       <%= @inner_content %>
     </div>
     </div>
