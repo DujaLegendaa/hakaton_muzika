@@ -41,8 +41,10 @@ defmodule HakatonMuzika.Playlists do
     |> Repo.preload(:songs)
   end
   def get_playlist_preloaded!(id) do
-    get_playlist!(id)
-    |> Repo.preload([:user, :songs])
+    query = from p  in Playlist,
+      preload: [songs: ^HakatonMuzika.Music.song_with_details_query()],
+      where: p.id == ^id
+    Repo.one!(query)
   end
 
   @doc """

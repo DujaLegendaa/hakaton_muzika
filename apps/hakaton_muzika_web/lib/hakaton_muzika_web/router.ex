@@ -83,13 +83,14 @@ defmodule HakatonMuzikaWeb.Router do
   scope "/", HakatonMuzikaWeb do
     pipe_through [:browser]
 
-    live "/", HomeLive
+    live "/", HomeLive, :index
 
     live "/player", Music.CurrentSongLive
-    live "/albums", Music.AlbumListLive
-    live "/albums/:id", Music.AlbumLive
+    live "/albums", Music.AlbumListLive, :index
+    live "/albums/:id", Music.AlbumLive, :index
     live "/scan", Music.Scan
     live "/playlists/:id", PlaylistLive, :index
+    get "/stream/:id", SongStreamController, :index
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new

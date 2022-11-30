@@ -20,7 +20,7 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
 
   def handle_event("play", %{"song_id" => id}, socket) do
     song = Music.get_song!(id)
-    #BluetoothAmpWeb.PlayerState.play(song)
+    HakatonMuzikaWeb.PlayerState.add_current_song(song)
     {:noreply, socket}
   end
 
@@ -33,7 +33,7 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
   def song_card(%{id: _, title: _, duration: _, track: _, album_name: _, album_cover: _, playlists: _} = assigns) do
 ~H"""
     <div class="relative">
-      <div class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
+      <div phx-click="play" phx-value-song_id={@id} class="flex justify-between m-0 p-3 rounded-xl hover:bg-neutral-900">
         <div class="flex gap-x-[1rem]">
           <img class="rounded-2xl w-[100px] lg:w-[200px]" src={HakatonMuzikaWeb.B3.get_url(@album_cover)} />
           <div class="flex flex-col justify-evenly">
