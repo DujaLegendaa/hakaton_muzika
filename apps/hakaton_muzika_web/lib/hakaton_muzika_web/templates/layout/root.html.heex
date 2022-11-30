@@ -15,26 +15,18 @@
         <div class="place-self-center">
           <img src="/images/zabica_nav.png" class="w-11 h-11">
         </div>
-        <div class="place-self-center">
-          <button data-phx-link="redirect", data-phx-link-state="push" href="/">
-            <FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </button>
-        </div>
-        <div class="place-self-center">
-          <button>
-          <FontAwesome.LiveView.icon name="bookmark" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </button>
-        </div>
-        <div class="place-self-center">
-          <button>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+          <FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/albums">
+          <FontAwesome.LiveView.icon name="compact-disc" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
           <FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </button>
-        </div>
-        <div class="place-self-center">
-          <button>
-            <FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </button>
-        </div>
+        </a>
+        <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+          <FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/>
+        </a>
       </div>
   <!--
   <%= if @current_user do %>
