@@ -1,6 +1,6 @@
 <div class="w-full flex justify-center">
 
-  <div class="grid grid-cols-1 bg-[#171817] justify-items-center gap-y-7 py-[10%] w-[40vh] rounded-xl drop-shadow-xl">
+  <div class="grid grid-cols-1 bg-[#171817] justify-items-center gap-y-7 py-[10%] w-[40vh] rounded-xl drop-shadow-xl ">
   <.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
     <div>
       <h1>Forgot your password?</h1>
@@ -10,7 +10,7 @@
       <%= error_tag f, :email %>
     </div>
     <div>
-    <button type="submit" class="bg-[#737373] text-[#eeeeee] rounded-xl w-[30vh] h-[5vh] mt-[5%]">Send instructions to reset password</button>
+    <button type="submit" class="bg-[#737373] text-[#eeeeee] rounded-xl w-[30vh] h-[5vh] mt-[5%]">Send</button>
     </div>
   </.form>
   </div>
