@@ -1,14 +1,20 @@
-<div class="bg-red-700">
-  <div>
-    <img src={@current_song.cover}/>
-    <div>
-      <p><%= @current_song.song.name %></p>
-      <p><%= @current_song.artist %></p>
+<%= if @current_song != nil do %>
+  <div phx-hook="AudioPlayer" id="audio-player" class="fixed bottom-0 w-full grid grid-cols-3 p-2 gap-x-4 bg-[#2A2B2F] border-[#212121] border-solid border-l-4">
+    <audio src="/stream/3" id="audio" preload="metadata" />
+  <div class="flex gap-x-4">
+    <img class="h-14" src={HakatonMuzikaWeb.B3.get_url @current_song.cover}/>
+    <div class="flex flex-col justify-center">
+      <p class="text-sm font-bold"><%= @current_song.song.name %></p>
+      <p class="text-sm"><%= @current_song.artist %></p>
     </div>
+    <button class="h-12" id="play-icon"></button>
   </div>
-  <div>
-<FontAwesome.LiveView.icon name="play" type="solid" class="w-4 h-4 fill-white"/>
+  <div class="flex gap-x-1 w-full">
+    <span id="current-time" class="text-sm self-center">0:00</span>
+    <input class="w-full accent-[#60A348]" type="range" id="seek-slider" max="100" value="0" />
+    <span id="duration" class="text-sm self-center">0:00</span>
   </div>
-  <audio src="/stream/3" id="audio-player" phx-hook="AudioPlayer" >
-  </audio>
-</div>
+    <input class="justify-self-center w-[30%] accent-[#60A348]"type="range" id="volume-slider" max="100" value="100" />
+
+  </div>
+<% end %>

@@ -24,15 +24,137 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
+import lottieWeb from "lottie-web";
 
+const calculateTime = (secs) => {
+  const minutes = Math.floor(secs / 60);
+  const seconds = Math.floor(secs % 60);
+  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return `${minutes}:${returnedSeconds}`;
+}
 let Hooks = {}
 Hooks.AudioPlayer = {
   mounted() {
-    console.log(this.el)
-    this.el.src="/stream/3"
-    this.handleEvent("current_song", ({id}) => {
-      this.el.src="/stream/"+id
+    const playIconEl = document.getElementById("play-icon")
+    let state = 'play'
+    const audioEl = document.getElementById("audio")
+    const durationEl = document.getElementById("duration")
+    const seekSlider = document.getElementById("seek-slider")
+    const currentTimeEl = document.getElementById("current-time")
+    const volumeSlider = document.getElementById("volume-slider")
+
+    const animation = lottieWeb.loadAnimation({
+      container: playIconEl,
+      path: "https://maxst.icons8.com/vue-static/landings/animated-icons/icons/pause/pause.json",
+      renderer: "svg",
+      loop: false,
+      autoplay: false,
+      name: "play animation" 
     })
+
+    animation.goToAndStop(14, true)
+
+    playIconEl.addEventListener("click", () => {
+      if (state == "play") {
+        audioEl.play()
+        animation.playSegments([14, 27], true)
+        state = "pause"
+      } else {
+        audioEl.pause()
+        animation.playSegments([0, 14], true)
+        state = "play"
+      }
+    })
+
+    const displayDuration = () => {
+      durationEl.textContent = calculateTime(audioEl.duration)
+    }
+
+    const setSliderMax = () => {
+      seekSlider.max = Math.floor(audioEl.duration)
+    }
+
+    seekSlider.addEventListener("input", () => {
+      currentTimeEl.textContent = calculateTime(seekSlider.value)
+    })
+
+    seekSlider.addEventListener("change", () => {
+      audioEl.currentTime = seekSlider.value
+    })
+
+    audioEl.addEventListener("timeupdate", () => {
+      seekSlider.value = Math.floor(audioEl.currentTime)
+      currentTimeEl.textContent = calculateTime(seekSlider.value)
+    })
+
+    volumeSlider.addEventListener("input", (e) => {
+      const value = e.target.value
+
+      audioEl.volume = value / 100
+    })
+
+    if (audioEl.readyState > 0) {
+      displayDuration()
+      setSliderMax()
+    } else {
+      audioEl.addEventListener("loadedmetadata", () => {
+        displayDuration()
+        setSliderMax()
+      })
+    }
+
+    this.handleEvent("current_song", ({id}) => {
+      document.getElementById("audio").src = "/stream/" + id
+    })
+  },
+  updated() {
+    const playIconEl = document.getElementById("play-icon")
+    const audioEl = document.getElementById("audio")
+    let state = "play"
+    const durationEl = document.getElementById("duration")
+    const seekSlider = document.getElementById("seek-slider")
+
+    const displayDuration = () => {
+      durationEl.textContent = calculateTime(audioEl.duration)
+    }
+
+    const setSliderMax = () => {
+      seekSlider.max = Math.floor(audioEl.duration)
+    }
+
+    if (audioEl.readyState > 0) {
+      displayDuration()
+      setSliderMax()
+    } else {
+      audioEl.addEventListener("loadedmetadata", () => {
+        displayDuration()
+        setSliderMax()
+      })
+    }
+
+    const animation = lottieWeb.loadAnimation({
+      container: playIconEl,
+      path: "https://maxst.icons8.com/vue-static/landings/animated-icons/icons/pause/pause.json",
+      renderer: "svg",
+      loop: false,
+      autoplay: false,
+      name: "play animation" 
+    })
+
+    animation.goToAndStop(14, true)
+
+    playIconEl.addEventListener("click", () => {
+      if (state == "play") {
+        audioEl.play()
+        animation.playSegments([14, 27], true)
+        state = "pause"
+      } else {
+        audioEl.pause()
+        animation.playSegments([0, 14], true)
+        state = "play"
+      }
+    })
+
   }
 }
 

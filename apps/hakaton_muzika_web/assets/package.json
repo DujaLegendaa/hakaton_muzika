@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "lottie-web": "^5.10.0",
     "tailwind-scrollbar": "^2.0.1"
   }
 }

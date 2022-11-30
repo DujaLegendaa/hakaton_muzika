@@ -8,4 +8,6 @@
     phx-value-key="error"><%= live_flash(@flash, :error) %></p>
 
   <%= @inner_content %>
+
+  <%= live_render(@socket, HakatonMuzikaWeb.Music.CurrentSongLive, id: "current song") %>
 </main>
