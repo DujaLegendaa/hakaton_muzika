@@ -3,13 +3,18 @@
   <div class="flex items-center justify-between flex-row">
 
     <div class="pl-[8vw]">
-      <p class="text-8xl font-bold"><span class="underline decoration-[#62A32A]">Ex</span>plore</p>
+      <p class="text-8xl font-bold fade-in"><span class="underline decoration-[#62A32A]">Ex</span>plore</p>
       <br>
       <br>
-      <p class="text-4xl">To explore music is to explore<br>yourself </p>
+      <p class="text-4xl fade-in">To explore music is to explore<br>yourself </p>
     </div>
-      <img class="h-[35vw]" src="/images/demo.jpg">
+      <img class="h-[35vw]" src="/images/alpha 1.jpg">
   </div>
+
+  <div class="">
+
+  </div>
+
   <div class=" grid grid-cols-5 gap-x-16 px-16">
     <%= for album <- @albums do %>
       <a class="flex items-center flex-col h-1/2" data-phx-link="redirect" data-phx-link-state="push" href={"/albums/#{album.id}"}>
