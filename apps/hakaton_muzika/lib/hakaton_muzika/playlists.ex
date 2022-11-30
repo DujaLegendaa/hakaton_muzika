@@ -20,6 +20,11 @@ defmodule HakatonMuzika.Playlists do
   def list_playlists do
     Repo.all(Playlist)
   end
+  def list_playlists_preloaded do
+    query = from p in Playlist,
+      preload: [songs: ^HakatonMuzika.Music.song_with_details_query()]
+    Repo.all(query)
+  end
 
   @doc """
   Gets a single playlist.

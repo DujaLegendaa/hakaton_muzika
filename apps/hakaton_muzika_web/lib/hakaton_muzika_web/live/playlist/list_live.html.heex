@@ -1,0 +1,10 @@
+<p class="text-3xl font-bold px-7">Playlists</p>
+<hr class="h-1 border-0 bg-[#2A2B2F]">
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-y-4 gap-x-10 p-7 ">
+  <%= for playlist <- HakatonMuzika.Playlists.list_playlists_preloaded() do %>
+    <a data-phx-link="redirect" data-phx-link-state="push" href={"/playlists/#{playlist.id}"}>
+      <img src={HakatonMuzikaWeb.B3.get_url(hd(playlist.songs).cover)} class=""/>
+      <p class="font-bold text-center"><%= cut_text(playlist.name) %></p>
+    </a>
+  <% end %>
+</div>

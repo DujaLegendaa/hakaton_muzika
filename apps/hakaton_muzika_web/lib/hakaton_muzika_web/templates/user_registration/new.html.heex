@@ -1,23 +1,23 @@
-<div class="w-full flex justify-center">
-<.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+<div class="w-full h-screen flex justify-center items-center">
+  <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
 
-    <div class="grid grid-cols-1 bg-[#171817] justify-items-center gap-y-7 py-[10%] w-[25em] rounded-xl drop-shadow-xl">
-      <h1 class="text-3xl pl-[10%] justify-self-start">Register</h1>
-        <input id="user_username" name="user[username]" type="text" value="" placeholder="Korisnicko ime" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] color-[#737373]">
-          <%= error_tag f, :username %>
+      <div class="grid grid-cols-1 bg-[#171817] justify-items-center gap-y-7 py-[10%] w-[25em] rounded-xl drop-shadow-xl">
+        <h1 class="text-3xl pl-[10%] justify-self-start">Register</h1>
+          <input id="user_username" name="user[username]" type="text" value="" placeholder="Username" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] color-[#737373]">
+            <%= error_tag f, :username %>
 
-        <input id="user_email" name="user[email]" type="email" value="" placeholder="E-mail" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] text-[#737373]">
-          <%= error_tag f, :email %>
+          <input id="user_email" name="user[email]" type="email" value="" placeholder="E-mail" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] text-[#737373]">
+            <%= error_tag f, :email %>
 
-        <input id="user_password" name="user[password]" type="password" value="" placeholder="Sifra" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] text-[#737373]">
-          <%= error_tag f, :password %>
+          <input id="user_password" name="user[password]" type="password" value="" placeholder="Password" class="input input-bordered w-full max-w-xs rounded-md bg-inherit border-[#737373] text-[#737373]">
+            <%= error_tag f, :password %>
 
-        <button type="submit" class="bg-[#60A348] text-[#eeeeee] rounded-xl w-[30vh] h-[5vh] mt-[5%] font-bold tracking-wide">Register</button>
-    </div>
-</.form>
+          <button type="submit" class="bg-[#60A348] text-[#eeeeee] rounded-xl w-[30vh] h-[5vh] mt-[5%] font-bold tracking-wide">Register</button>
+      </div>
+  </.form>
 </div>

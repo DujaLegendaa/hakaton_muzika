@@ -1,4 +1,4 @@
-defmodule HakatonMuzikaWeb.PlaylistLive do
+defmodule HakatonMuzikaWeb.Playlist.OneLive do
   use HakatonMuzikaWeb, :live_view
 
   alias HakatonMuzika.Playlists

@@ -89,7 +89,8 @@ defmodule HakatonMuzikaWeb.Router do
     live "/albums", Music.AlbumListLive, :index
     live "/albums/:id", Music.AlbumLive, :index
     live "/scan", Music.Scan
-    live "/playlists/:id", PlaylistLive, :index
+    live "/playlists", Playlist.ListLive, :index
+    live "/playlists/:id", Playlist.OneLive, :index
     get "/stream/:id", SongStreamController, :index
 
     delete "/users/log_out", UserSessionController, :delete
