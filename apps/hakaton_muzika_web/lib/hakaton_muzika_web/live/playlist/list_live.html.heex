@@ -14,8 +14,8 @@
       <input type="text" placeholder="Name" value="" class="w-full"/>
       <button type="submit">Create</button>
     </div>
-  <div phx-click={Phoenix.LiveView.JS.toggle(to: "#create-form-div")} class="w-full h-[70%]">
-    <img  src="/images/add_playlist.png" class="absolute top-0 left-0 -z-10"/>
+    <div phx-click={Phoenix.LiveView.JS.show(to: "#create-form-div") |> Phoenix.LiveView.JS.add_class("absolute", to: "#img")} class="w-full h-[70%]">
+    <img  src="/images/add_playlist.png" id="img" class="top-0 left-0 -z-10"/>
     </div>
   </div>
 </div>
