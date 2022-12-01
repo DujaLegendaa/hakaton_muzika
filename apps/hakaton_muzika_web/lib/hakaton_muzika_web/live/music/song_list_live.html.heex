@@ -1,0 +1,11 @@
+<div>
+  <p class="text-6xl font-bold px-7 my-4">Songs</p>
+  <hr class="h-1 border-0 bg-[#2A2B2F]">
+  <hr class="h-1 border-0 bg-[#2A2B2F]">
+  <div class="overflow-y-scroll h-[100vh] scrollbar-thin scrollbar-thumb-white scrollbar-track-[#2A2B2F]">
+    <%= for %{song: s, cover: c, album_name: a} <- HakatonMuzika.Music.list_songs_with_info() do %>
+      <.song_card title={s.name} duration={s.duration} track={s.track} id={s.id} cover={c} album_name={a} playlists={@user_playlists} />
+    <% end %>
+  </div>
+</div>
+

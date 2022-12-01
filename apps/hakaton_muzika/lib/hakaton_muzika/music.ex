@@ -228,6 +228,9 @@ defmodule HakatonMuzika.Music do
   def list_songs do
     Repo.all(Song)
   end
+  def list_songs_with_info do
+    Repo.all(song_with_details_query()) 
+  end
 
   @doc """
   Gets a single song.
