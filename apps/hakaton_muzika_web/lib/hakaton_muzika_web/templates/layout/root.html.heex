@@ -9,28 +9,78 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
+
+  <style>
+  #tooltip{
+    position: relative;
+    cursor: pointer;
+  }
+  #tooltiptext{
+    position: absolute;
+    left: 3em;
+    top: -1em;
+    background-color: #2A2B2F;
+    color: #fff;
+    white-space:nowrap;
+    padding: 10px 15px;
+    border-radius: 0 7px 7px 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  #tooltiptext::before{
+    content: "";
+    position: absolute;
+    top: 3em;
+  }
+
+  #tooltip:hover #tooltiptext{
+    visibility: visible;
+    opacity: 1;
+  }
+  </style>
+
   <body class="bg-[#212121] text-white">
     <div class="flex">
       <div class="flex flex-col gap-y-[7vh] bg-[#2A2B2F] w-[5em] h-screen">
         <div class="place-self-center">
           <img src="/images/zabica gif.gif" class="w-15 h-15 pl-3 mt-5">
         </div>
-        <div class="flex flex-col justify-around h-[60%]">
-          <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
-            <FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </a>
-          <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/albums">
-            <FontAwesome.LiveView.icon name="compact-disc" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </a>
-          <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/playlists">
-            <FontAwesome.LiveView.icon name="headphones" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </a>
-          <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
-            <FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </a>
-          <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
-            <FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/>
-          </a>
+
+        <div class="flex flex-col justify-around h-[60%] pl-6">
+          <div id="tooltip">
+            <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+              <FontAwesome.LiveView.icon name="house" type="solid" class="w-7 h-7 fill-slate-400"/>
+              <span id="tooltiptext">Home</span>
+            </a>
+          </div>
+
+          <div id="tooltip">
+            <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/albums">
+              <FontAwesome.LiveView.icon name="compact-disc" type="solid" class="w-7 h-7 fill-slate-400"/>
+            </a>
+            <span id="tooltiptext">Albums</span>
+          </div>
+
+          <div id="tooltip">
+            <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/playlists">
+              <FontAwesome.LiveView.icon name="headphones" type="solid" class="w-7 h-7 fill-slate-400"/>
+            </a>
+            <span id="tooltiptext">Playlists</span>
+          </div>
+
+          <div id="tooltip">
+            <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+              <FontAwesome.LiveView.icon name="user" type="solid" class="w-7 h-7 fill-slate-400"/>
+            </a>
+          </div>
+
+          <div id="tooltip">
+            <a class="place-self-center" data-phx-link="redirect" data-phx-link-state="push" href="/">
+              <FontAwesome.LiveView.icon name="gear" type="solid" class="w-7 h-7 fill-slate-400"/>
+            </a>
+          </div>
         </div>
       </div>
   <!--
