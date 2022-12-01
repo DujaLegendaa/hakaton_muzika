@@ -85,6 +85,7 @@ defmodule HakatonMuzikaWeb.Router do
 
     live "/", HomeLive, :index
 
+    live "/songs", Music.SongListLive, :index
     live "/player", Music.CurrentSongLive
     live "/albums", Music.AlbumListLive, :index
     live "/albums/:id", Music.AlbumLive, :index
