@@ -38,7 +38,7 @@ defmodule HakatonMuzikaWeb.Music.AlbumLive do
   def handle_event("add-to-playlist", %{"playlist_id" => playlist_id, "song_id" => song_id}, socket) do
     # TODO optimize this call
     HakatonMuzika.Playlists.add_song(HakatonMuzika.Playlists.get_playlist!(playlist_id), HakatonMuzika.Music.get_song!(song_id))
-    {:noreply, socket}
+    {:noreply, put_flash(socket, :info, "Successfully added to playlist")}
   end
 
   def song_card(%{id: _, title: _, duration: _, track: _, cover: _, album_name: _, playlists: _} = assigns) do

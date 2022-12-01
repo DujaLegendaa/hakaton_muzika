@@ -1,12 +1,36 @@
 <div>
   <div class="shadow-[inset_-10px_0px_10px_5px_#212121] h-[30vh]">
-  <img class="mix-blend-multiply max-h-full w-full object-none" src={HakatonMuzikaWeb.B3.get_url hd(@playlist.songs).cover} />
+    <img class="mix-blend-multiply max-h-full w-full object-none" src={HakatonMuzikaWeb.B3.get_url hd(@playlist.songs).cover} />
   </div>
-  <p class="text-4xl px-3 my-2"> <%= @playlist.name %> </p>
+  <div class="flex px-3 gap-x-10 items-center">
+    <span class="text-4xl my-2"> <%= @playlist.name %> </span>
+    <%= if @current_user != nil and @playlist.user_id == @current_user.id do %>
+    <span phx-click="delete">
+      <FontAwesome.LiveView.icon name="trash-can" type="solid" class="w-7 h-7 fill-white cursor-pointer hover:fill-red-500 transition duration-150" />
+    </span>
+    <% end %>
+  </div>
   <hr class="h-1 border-0 bg-[#2A2B2F]">
   <div class="overflow-y-scroll h-[50vh] scrollbar-thin scrollbar-thumb-white scrollbar-track-[#2A2B2F]">
     <%= for %{song: s, album_name: n, cover: c, artist: a} <- @playlist.songs do %>
-      <.song_card title={s.name} duration={s.duration} track={s.track} id={s.id} cover={c} album_name={n} artist_name={a}/>
+    <div class="flex px-10 py-2 gap-x-2">
+      <img class="w-[50px] lg:w-[80px]" src={HakatonMuzikaWeb.B3.get_url c} />
+      <div class="grid grid-cols-3 items-center w-full">
+      <div>
+        <p class="text-sm lg:text-md"> <%= cut_text s.name %> </p>
+        <p class="text-xs lg:text-sm"> <%= cut_text a %></p>
+      </div>
+      <p class="justify-self-center text-sm lg:text-md font-bold"> <%= cut_text n %></p>
+      <div class="justify-self-end flex items-center gap-x-3">
+        <p class="text-xs lg:text-sm"> <%= duration_str s.duration %> </p>
+        <%= if @current_user != nil and @playlist.user_id == @current_user.id do %>
+        <span phx-click="remove_song" phx-value-song_id={s.id}>
+          <FontAwesome.LiveView.icon name="xmark" type="solid" class="w-6 h-6 cursor-pointer transition duration-150 fill-white hover:fill-red-500" />
+        </span>
+        <% end %>
+      </div>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>

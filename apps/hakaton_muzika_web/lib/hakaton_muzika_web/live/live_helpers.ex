@@ -2,6 +2,17 @@ defmodule HakatonMuzikaWeb.LiveHelpers do
   import Phoenix.LiveView
   import Phoenix.LiveView.Helpers
 
+  def assign_current_user(socket, session) do
+    assign_new(socket, :current_user, 
+      fn -> 
+        case Map.fetch(session, "user_token") do
+          {:ok, token} -> 
+            HakatonMuzika.Accounts.get_user_by_session_token(token)
+          :error -> 
+            nil
+        end
+    end)
+  end
   def cut_text(text) do
     if String.length(text) < 36 do
       text
