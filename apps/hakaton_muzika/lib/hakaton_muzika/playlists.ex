@@ -3,6 +3,7 @@ defmodule HakatonMuzika.Playlists do
   The Playlists context.
   """
 
+    require Logger
   import Ecto.Query, warn: false
   alias HakatonMuzika.Repo
 
@@ -123,6 +124,14 @@ defmodule HakatonMuzika.Playlists do
     playlist
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.put_assoc(:songs, [song | playlist.songs])
+    |> Repo.update()
+  end
+
+  def remove_song(playlist, song_id) do
+    song_id = String.to_integer(song_id)
+    playlist
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:songs, Enum.filter(playlist.songs, fn s -> s.id != song_id end))
     |> Repo.update()
   end
 

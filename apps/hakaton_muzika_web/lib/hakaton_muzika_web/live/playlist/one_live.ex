@@ -1,4 +1,5 @@
 defmodule HakatonMuzikaWeb.Playlist.OneLive do
+  require Logger
   use HakatonMuzikaWeb, :live_view
 
   alias HakatonMuzika.Playlists
@@ -20,6 +21,9 @@ defmodule HakatonMuzikaWeb.Playlist.OneLive do
   end
 
   def handle_event("remove_song", %{"song_id" => song_id}, socket) do
+    Logger.alert(song_id)
+    Logger.alert(socket.assigns.playlist.id)
+    Playlists.remove_song(socket.assigns.playlist, song_id)
     {:noreply, socket} 
   end
 
