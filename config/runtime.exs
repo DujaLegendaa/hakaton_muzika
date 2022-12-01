@@ -23,8 +23,14 @@ if config_env() == :prod do
       For example: /etc/hakaton_muzika/hakaton_muzika.db
       """
 
+  music_path = 
+    System.get_env("MUSIC_PATH") ||
+      raise """
+        environment variable MUSIC PATH is missing
+        """
+
   config :hakaton_muzika,
-    music_path: Path.expand("~/Music/")
+    music_path: music_path
 
   config :hakaton_muzika, HakatonMuzika.Repo,
     database: database_path,
