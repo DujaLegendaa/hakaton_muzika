@@ -9,10 +9,12 @@
       </a>
     <% end %>
   <% end %>
-  <div class="relative">
-    <div class="hidden" id="create-form-div">
-      <input type="text" placeholder="Name" value="" class="w-full"/>
-      <button type="submit">Create</button>
+  <div class="relative min-w-[12em]">
+    <div class="hidden mt-[3.5em] flex px-2 bg-[#2A2B2F]" id="create-form-div">
+      <input type="text" placeholder="Playlist name" value="" class="w-full min-h-[3em] text-black rounded-md"/>
+      <div class="flex w-full justify-center mt-[0.5em]">
+        <button class="w-[50%] h-[2em] mt-[1em] rounded-md bg-[#62A32A] text-white font-bold" type="submit">Create</button>
+      </div>
     </div>
     <div phx-click={Phoenix.LiveView.JS.show(to: "#create-form-div") |> Phoenix.LiveView.JS.add_class("absolute", to: "#img")} class="w-full h-[70%]">
     <img  src="/images/add_playlist.png" id="img" class="top-0 left-0 -z-10"/>
